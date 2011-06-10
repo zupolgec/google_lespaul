@@ -100,7 +100,7 @@
 				H && window.clearTimeout(H);
 				var b = "http://google-lespaul.appspot.com?callback=google.doodle.url&url=" + encodeURIComponent(a),
 					c = document.createElement("script");
-				c.src = b;alert(b);
+				c.src = b;
 				c.id = "goo-gl-script";
 				H = window.setTimeout(function() {
 					la(a)
@@ -913,7 +913,7 @@
 						u = t.contentDocument;
 						if (u == void 0 || u == g) u = t.contentWindow.document;
 						u.open();
-						u.write("<html><head></head><body><object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"0\" height=\"0\" id=\"guitar11-sound-player\" type=\"application/x-shockwave-flash\"><param name=\"movie\" value=\"/lespaul/guitar11.swf\"><param name=\"allowScriptAccess\" value=\"always\"><object id=\"guitar11-sound-player-2\" type=\"application/x-shockwave-flash\" data=\"/lespaul/guitar11.swf\" width=\"0\" height=\"0\"><param name=\"allowScriptAccess\" value=\"always\"></object></object></body></html>");
+						u.write("<html><head></head><body><object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"0\" height=\"0\" id=\"guitar11-sound-player\" type=\"application/x-shockwave-flash\"><param name=\"movie\" value=\"/src/guitar11.swf\"><param name=\"allowScriptAccess\" value=\"always\"><object id=\"guitar11-sound-player-2\" type=\"application/x-shockwave-flash\" data=\"/src/guitar11.swf\" width=\"0\" height=\"0\"><param name=\"allowScriptAccess\" value=\"always\"></object></object></body></html>");
 						u.close();
 						a = !0
 					}
