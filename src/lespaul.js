@@ -818,7 +818,9 @@
                     Ga("guitar11-sound-player") || Ga("guitar11-sound-player-2");
 			},
 			Ga = function(a) {
-                if (a = u.getElementById(a) && a.playTrack) {
+                a = u.getElementById(a);
+                
+                if (a && a.playTrack) {
                     s = a;
                     r = true;
                     Ia();
