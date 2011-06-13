@@ -2,9 +2,10 @@
 	var g = null,
 		h;
 	try {
+		if (!window.google) window.google = {};
 		if (!google.doodle) google.doodle = {};
 		
-		var i, m, n, o, r, s, t, u, v, aa, w, ba, ca, da = navigator.userAgent.indexOf("MSIE") >= 0,
+		var i, n, o, r, s, t, u, v, aa, w, ba, ca, da = navigator.userAgent.indexOf("MSIE") >= 0,
 			ea = [
 				[3, "#776a62", "#2063ff", 2, [
 					[28, 23],
@@ -92,10 +93,6 @@
 			if (a) if (i == 4) a.style.backgroundPosition = "-809px 0";
 			else {
 				a.style.backgroundPosition = "-809px -39px";
-				a = document.forms.f || document.forms.gs || document.forms.ab;
-				try {
-					a.q.focus()
-				} catch (b) {}
 			}
 		});
 		
@@ -186,13 +183,6 @@
 				E(document, "touchmove", Q);
 				E(document, "touchstart", sa);
 				E(window, "resize", ta);
-				var a = document.forms.f || document.forms.gs || document.forms.ab;
-				a && (E(a.q, "blur", function () {
-					m = !1
-				}), E(a.q, "focus", function () {
-					m = !0;
-					i != 5 && G(0)
-				}));
 				E(document.body, "mouseout", ua);
 				if (a = document.getElementById("hplogo-on")) a.onclick = ja, a.style.cursor = "pointer";
 				if (a = document.getElementById("hplogo-led")) a.onclick = ja, a.style.cursor = "pointer";
@@ -257,7 +247,7 @@
 			},
 			ra = function (a) {
 				var b = a || window.event;
-				return n && !m && !b.altKey && !b.ctrlKey && !b.metaKey && (b = xa[b.keyCode], typeof b == "number") ? (i == 0 && G(4), n.aa(b), F(a)) : !0
+				return n && !b.altKey && !b.ctrlKey && !b.metaKey && (b = xa[b.keyCode], typeof b == "number") ? (i == 0 && G(4), n.aa(b), F(a)) : !0
 			},
 			ta = function () {
 				z && o != g && (z = !1, window.setTimeout(function () {
@@ -840,8 +830,6 @@
 					a && (oa = typeof a.style.opacity != "undefined");
 					
 					va();
-					
-					m = !0;
 					
 					La();
 					

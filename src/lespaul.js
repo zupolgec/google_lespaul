@@ -2,11 +2,11 @@
 	var g = null,
 		h;
 	try {
-		if(!window.google) window.google = {};
+		if (!window.google) window.google = {};
 		if (!google.doodle) google.doodle = {};
 		
-		var j, m, o, p, r, s, aa, t, u, ba, v, ca, da, ea = navigator.userAgent.indexOf("MSIE") >= 0,
-			fa = [
+		var j, o, p, r, s, aa, t, u, ba, v, ca, da, ea = navigator.userAgent.indexOf("MSIE") >= 0,
+			guitarStrings = [ // [note,baseColor,stringColor,stringThickness,[[startX,startY],[endX,endY]]
 				[3, "#776a62", "#2063ff", 2, [
 					[28, 23],
 					[103, 23]
@@ -233,7 +233,7 @@
 				ga = a[0];
 				ha = a[1]
 			},
-			Ba = {
+			keyBindings = { // ASCII code: guitarString
 				49: 2,
 				50: 6,
 				51: 3,
@@ -277,7 +277,7 @@
 			},
 			va = function(a) {
 				var b = a || window.event;
-				return o && !b.altKey && !b.ctrlKey && !b.metaKey && (b = Ba[b.keyCode], typeof b == "number") ? (j == 0 && F(4), o.V(b), E(a)) : !0
+				return o && !b.altKey && !b.ctrlKey && !b.metaKey && (b = keyBindings[b.keyCode], typeof b == "number") ? (j == 0 && F(4), o.V(b), E(a)) : !0
 			},
 			xa = function() {
 				y && p != g && (y = !1, window.setTimeout(function() {
@@ -316,7 +316,7 @@
 			};
 		h = Ca.prototype;
 		h.Xa = function() {
-			for (var a = 0, b; b = fa[a++];) this.J.push(new Da(b[4][0][0], b[4][0][1], b[4][1][0], b[4][1][1], b[3], b[1], b[2], a, b[0], this.i, this.Y, this))
+			for (var a = 0, b; b = guitarStrings[a++];) this.J.push(new Da(b[4][0][0], b[4][0][1], b[4][1][0], b[4][1][1], b[3], b[1], b[2], a, b[0], this.i, this.Y, this))
 		};
 		h.T = function() {
 			return ga - w
