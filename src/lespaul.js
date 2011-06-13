@@ -52,70 +52,122 @@
 			ha = 0,
 			w = 0,
 			x = 0,
-			y = !0,
+			y = true,
 			z = [],
 			A = g,
 			B = g,
 			C = function(a) {
-				a && a.parentNode && a.parentNode.removeChild(a)
+				if (a && a.parentNode)
+                    a.parentNode.removeChild(a);
 			},
 			D = function(a, b, c) {
 				if (a) {
-					if (!google.doodle.ka) google.doodle.ka = [];
-					google.doodle.ka.push(arguments);
-					var d = a,
-						e = b,
-						f = c;
-					d.addEventListener ? d.addEventListener(e, f, !1) : d.attachEvent("on" + e, f)
+					if (!google.doodle.ka)
+                        google.doodle.ka = [];
+					
+                    google.doodle.ka.push(arguments);
+					
+                    if (a.addEventListener)
+                        a.addEventListener(b, c, false);
+                    else
+                        a.attachEvent("on" + b, f);
 				}
 			},
 			ia = function(a, b, c) {
-				a && (a.removeEventListener ? a.removeEventListener(b, c, !1) : a.detachEvent("on" + b, c))
+				if (a) {
+                    if (a.removeEventListener)
+                        a.removeEventListener(b, c, false);
+                    else
+                        a.detachEvent("on" + b, c);
+				}
 			},
 			ja = function() {
-				if (google.doodle.ka) for (var a; a = google.doodle.ka.pop();) ia.apply(g, a)
+				if (google.doodle.ka) {
+                    for (var a; a = google.doodle.ka.pop();)
+                        ia.apply(g, a);
+				}
 			},
 			E = function(a) {
-				a ? a.stopPropagation && a.stopPropagation() : window.event.cancelBubble = !0;
-				return !1
+				if (a) {
+                    if (a.stopPropagation)
+                        a.stopPropagation();
+				}
+                else
+                    window.event.cancelBubble = true;
+                
+				return false;
 			},
 			F = function(a) {
 				if (j !== a) {
 					var b = j;
+                    
 					j = a;
-					for (a = 0; a < z.length; ++a) z[a](b)
+					
+                    for (a = 0; a < z.length; ++a)
+                        z[a](b);
 				}
 			},
 			G = 0;
 		z.push(function() {
 			var a = document.getElementById("hplogo-on");
-			if (a) j == 1 ? (a.style.backgroundPosition = "-476px -139px", G = 0) : j == 2 ? G = 1 : (a.style.backgroundPosition = "-2000px -2000px", G = 0)
+            
+			if (a) {
+                if (j == 1) {
+                    a.style.backgroundPosition = "-476px -139px";
+                    G = 0;
+                }
+                else {
+                    if (j == 2)
+                        G = 1;
+                    else {
+                        a.style.backgroundPosition = "-2000px -2000px";
+                        G = 0;
+                    }
+                }
+			}
 		});
 		var ka = function(a) {
-				j == 0 || j == 5 || j == 4 ? F(1) : F(4);
-				return E(a)
+				if (j === 0 || j == 5 || j == 4)
+                    F(1);
+                else
+                    F(4);
+				
+                return E(a);
 			},
 			H = g,
 			ma = function(a) {
 				C(document.getElementById("goo-gl-script"));
-				H && window.clearTimeout(H);
+                
+				if (H)
+                    window.clearTimeout(H);
+                
 				var b = "http://google-lespaul.appspot.com?callback=google.doodle.url&url=" + encodeURIComponent(a),
 					c = document.createElement("script");
+                
 				c.src = b;
+                
 				c.id = "goo-gl-script";
+                
 				H = window.setTimeout(function() {
-					la(a)
+					la(a);
 				}, 2E3);
-				(document.getElementById("xjsc") || document.body).appendChild(c)
+                
+				document.body.appendChild(c);
 			},
 			na = function(a) {
-				a && a.status == "OK" && !a.error && a.id && la(a.id)
+				if (a && a.status == "OK" && !a.error && a.id)
+                    la(a.id);
 			},
 			la = function(a) {
-				if (j == 0 || j == 4) {
+				if (j === 0 || j == 4) {
 					window.clearTimeout(H);
+                    
 					var b = document.getElementById("hplogo-lcd-text");
-					if (b) b.value = a, b.select()
+                    
+					if (b) {
+                        b.value = a;
+                        b.select();
+				    }
 				}
 			},
 			I = [
@@ -126,38 +178,69 @@
 			],
 			J = function(a) {
 				var b = document.getElementById("hplogo-lcd-screen");
-				if (b) b.style.backgroundPosition = "-678px -139px";
-				if (b = document.getElementById("hplogo-lcd-icon")) b.style.backgroundPosition = I[a][0] + "px " + I[a][1] + "px", b.style.height = I[a][2] + "px", b.style.width = I[a][3] + "px", b.style.left = I[a][4] + "px", b.style.top = I[a][5] + "px"
+                
+				if (b)
+                    b.style.backgroundPosition = "-678px -139px";
+                    
+				if (b = document.getElementById("hplogo-lcd-icon")) {
+                    b.style.backgroundPosition = I[a][0] + "px " + I[a][1] + "px";
+                    b.style.height = I[a][2] + "px";
+                    b.style.width = I[a][3] + "px";
+                    b.style.left = I[a][4] + "px";
+                    b.style.top = I[a][5] + "px";
+			    }
 			};
 		z.push(function(a) {
 			var b = document.getElementById("hplogo-lcd-text");
+            
 			if (j == 5) {
-				if (J(1), b.value == "")
+				if (J(1) && b.value === "")
 					b.value = "Playing...";
 			}
-			else if (A && (j == 0 || j == 4)) {
-				if (J(2), K(), b.value == "Playing...")
+			else if (A && (j === 0 || j == 4)) {
+				if (J(2) && K() && b.value == "Playing...")
 					b.value = "";
 			}
-			else if (j == 1)
-				J(3), b.value = "Recording";
+			else if (j == 1) {
+				J(3);
+                b.value = "Recording";
+			}
 			
-			if (j != 2 && (a == 1 || a == 2) && A)
-				A.stop(), K(), J(A.u.length == 0 ? 0 : 2), b.value = "", B = g, (a = A.eb()) && ma(a);
+			if (j != 2 && (a == 1 || a == 2) && A) {
+				A.stop();
+                K();
+                
+                J((A.u.length === 0) ? 0 : 2);
+                
+                b.value = "";
+                B = g;
+                
+                if (a = A.eb())
+                    ma(a);
+			}
 		});
 		var oa = function(a) {
-				A && (j == 0 || j == 4) ? (F(5), A.play()) : j == 5 && F(4);
-				return E(a)
+				if (A && (j === 0 || j == 4)) {
+                    F(5);
+                    A.play();
+                }
+                else if(j == 5)
+                    F(4);
+				
+                return E(a);
 			};
 		z.push(function() {
-			if (j != 0) try {
-				document.getElementById("hplogo-i").focus()
+			if (j !== 0) try {
+				document.getElementById("hplogo-i").focus();
 			} catch (a) {}
 		});
 		z.push(function() {
-			j == 1 && (A = new L, B = A.ib())
+			if (j == 1) {
+                A = new L();
+                B = A.ib();
+			}
 		});
-		var pa = !1,
+		var pa = false,
 			qa = {
 				el: 1,
 				iw: 1,
@@ -177,61 +260,89 @@
 			},
 			ra = function() {
 				if (!pa && !qa[google.kHL]) {
-					pa = !0;
+					pa = true;
+                    
 					window.WebFontConfig = {
 						google: {
 							families: ["VT323"]
 						}
 					};
+                    
 					var a = document.createElement("script");
 					a.src = ("https:" == document.location.protocol ? "https" : "http") + "://ajax.googleapis.com/ajax/libs/webfont/1/webfont.js";
 					a.type = "text/javascript";
 					a.async = "true";
-					(document.getElementById("xjsc") || document.body).appendChild(a)
+					document.body.appendChild(a);
 				}
 			},
-			sa = !1,
+			sa = false,
 			N = g,
 			ua = function() {
 				O();
 				N = window.setTimeout(function() {
-					ta(!0)
-				}, 1E3)
+					ta(true);
+				}, 1E3);
 			},
 			O = function() {
-				N && window.clearTimeout(N);
+				if (N)
+                    window.clearTimeout(N);
+                
 				N = g;
-				ta(!1)
+				ta(false);
 			},
 			ta = function(a) {
 				var b = document.getElementById("hplogot");
-				if (b) sa ? (b.style.display = "block", b.style.opacity = a ? 1 : 0) : b.style.display = a ? "block" : "none"
+				if (b) {
+                    if (sa) {
+                        b.style.display = "block";
+                        b.style.opacity = a ? 1 : 0;
+                    }
+                    else
+                        b.style.display = a ? "block" : "none";
+				}
 			},
 			za = function() {
 				D(document, "keydown", va);
 				D(document, "mousemove", P);
 				D(document, "touchmove", P);
 				D(document, "touchstart", wa);
-				D(window, "resize", xa);
+				
+                D(window, "resize", xa);
 				D(document.body, "mouseout", ya);
-				if (a = document.getElementById("hplogo-on")) a.onclick = ka, a.style.cursor = "pointer";
-				if (a = document.getElementById("hplogo-led")) a.onclick = ka, a.style.cursor = "pointer";
-				if (a = document.getElementById("hplogo-lcd-icon")) a.onclick = oa;
-				if ((a = document.getElementById("hplogo-click")) && !ea) a.onmousemove = ua, a.onmouseout = O
+				
+                if (a = document.getElementById("hplogo-on")) {
+                    a.onclick = ka;
+                    a.style.cursor = "pointer";
+				}
+                
+				if (a = document.getElementById("hplogo-led")) {
+                    a.onclick = ka;
+                    a.style.cursor = "pointer";
+				}
+                
+				if (a = document.getElementById("hplogo-lcd-icon"))
+                    a.onclick = oa;
+                
+				if ((a = document.getElementById("hplogo-click")) && !ea) {
+                    a.onmousemove = ua;
+                    a.onmouseout = O;
+				}
 			},
 			wa = function(a) {
 				var b = Aa(a);
-				b[0] >= w && b[0] <= w + 474 && b[1] >= x && b[1] <= x + 175 && a.preventDefault()
+                
+				if (b[0] >= w && b[0] <= w + 474 && b[1] >= x && b[1] <= x + 175)
+                    a.preventDefault();
 			},
 			Aa = function(a) {
 				a = a || window.event;
-				return [(a.clientX || a.targetTouches && a.targetTouches[0].clientX || 0) + (document.body.scrollLeft || document.documentElement.scrollLeft), (a.clientY || a.targetTouches && a.targetTouches[0].clientY || 0) + (document.body.scrollTop || document.documentElement.scrollTop)]
+				return [(a.clientX || a.targetTouches && a.targetTouches[0].clientX || 0) + (document.body.scrollLeft || document.documentElement.scrollLeft), (a.clientY || a.targetTouches && a.targetTouches[0].clientY || 0) + (document.body.scrollTop || document.documentElement.scrollTop)];
 			},
 			P = function(a) {
 				a = a || window.event;
 				a = Aa(a);
 				ga = a[0];
-				ha = a[1]
+				ha = a[1];
 			},
 			keyBindings = { // ASCII code: guitarString
 				49: 2,
@@ -277,25 +388,55 @@
 			},
 			va = function(a) {
 				var b = a || window.event;
-				return o && !b.altKey && !b.ctrlKey && !b.metaKey && (b = keyBindings[b.keyCode], typeof b == "number") ? (j == 0 && F(4), o.V(b), E(a)) : !0
+                if (o && !b.altKey && !b.ctrlKey && !b.metaKey) {
+                    b = keyBindings[b.keyCode];
+                    
+                    if (typeof b == "number") {
+                        if (j === 0)
+                            F(4);
+                        
+                        o.V(b);
+                        E(a);
+                    }
+                    else
+                        return true;
+                }
+                else
+                    return false;
 			},
 			xa = function() {
-				y && p != g && (y = !1, window.setTimeout(function() {
-					y = !0;
-					var a = p,
-						b = 0;
-					do b += a.offsetLeft;
-					while (a = a.offsetParent);
-					w = b;
-					a = p;
-					b = 0;
-					do b += a.offsetTop;
-					while (a = a.offsetParent);
-					x = b
-				}, 30))
+				if (y && p != g) {
+                    y = false;
+                    
+                    window.setTimeout(function() {
+                        y = true;
+                        
+                        var a = p,
+                            b = 0;
+                            
+                        do {
+                            b += a.offsetLeft;
+                        }
+                        while (a = a.offsetParent);
+                        
+                        w = b;
+                        a = p;
+                        b = 0;
+                        
+                        do {
+                            b += a.offsetTop;
+                        }
+                        while (a = a.offsetParent);
+                        
+                        x = b;
+                    }, 30);
+				}
 			},
 			ya = function(a) {
-				(a = a || window.event) && !a.toElement && P(a)
+				a = a || window.event;
+                
+                if (a && !a.toElement)
+                    P(a);
 			},
 			Ca = function(a, b) {
 				this.i = a;
@@ -303,84 +444,110 @@
 				this.width = 474;
 				this.height = 175;
 				this.J = [];
-				this.Ja = this.U = !1;
+				this.Ja = this.U = false;
 				this.ha = 0;
 				this.ta = this.T();
 				this.ua = this.ia();
 				this.qa = new Q(0, 0);
 				this.ra = new Q(0, 0);
-				this.Ia = !0;
-				this.La = (new Date).getTime();
+				this.Ia = true;
+				this.La = (new Date()).getTime();
 				this.Xa();
-				this.Ka()
+				this.Ka();
 			};
 		h = Ca.prototype;
 		h.Xa = function() {
-			for (var a = 0, b; b = guitarStrings[a++];) this.J.push(new Da(b[4][0][0], b[4][0][1], b[4][1][0], b[4][1][1], b[3], b[1], b[2], a, b[0], this.i, this.Y, this))
+			for (var a = 0, b; b = guitarStrings[a++];)
+                this.J.push(new Da(b[4][0][0], b[4][0][1], b[4][1][0], b[4][1][1], b[3], b[1], b[2], a, b[0], this.i, this.Y, this));
 		};
 		h.T = function() {
-			return ga - w
+			return ga - w;
 		};
 		h.ia = function() {
-			return ha - x
+			return ha - x;
 		};
 		h.Ha = function(a) {
-			return R(a, this.width) / this.width
+			return R(a, this.width) / this.width;
 		};
 		h.kb = function() {
 			this.bb();
-			this.Ja && this.ab();
-			this.U && (this.i && this.i.clearRect(0, 0, this.width, this.height), this.Ka())
+			
+            if (this.Ja)
+                this.ab();
+			
+            if (this.U) {
+                if (this.i)
+                    this.i.clearRect(0, 0, this.width, this.height);
+                
+                this.Ka();
+            }
 		};
 		h.Ka = function() {
-			for (var a = 0, b; b = this.J[a++];) b.hb(), b.gb()
+			for (var a = 0, b; b = this.J[a++];) {
+                b.hb();
+                b.gb();
+			}
 		};
 		h.ya = function() {
-			if (this.J) for (var a = 0, b; b = this.J[a++];) b.ya()
+			if (this.J) {
+                for (var a = 0, b; b = this.J[a++];)
+                    b.ya();
+			}
 		};
 		h.Va = function() {
-			for (var a = 0, b; b = this.J[a++];) if (b.L || b.O) {
-				this.U = !0;
-				return
+			for (var a = 0, b; b = this.J[a++];) {
+                if (b.L || b.O) {
+				    this.U = true;
+				    return;
+			    }
 			}
-			this.U = !1
+            
+			this.U = false;
 		};
 		h.bb = function() {
-			var a = (new Date).getTime(),
-				b = (a - this.La) / 1E3;
-			this.La = a;
+			var timeNow = (new Date()).getTime(),
+				b = (timeNow - this.La) / 1E3;
+            
+			this.La = timeNow;
+            
 			var a = this.T(),
 				c = this.ia();
+            
 			this.qa.x = this.ta;
 			this.qa.y = this.ua;
 			this.ra.x = a;
 			this.ra.y = c;
+            
 			var d = a - this.ta,
-				e = c - this.ua,
-				d = Math.sqrt(d * d + e * e);
+				e = c - this.ua;
+            
+			d = Math.sqrt(d * d + e * e);
+            
 			this.Ja = d > 0;
 			this.ha = (this.ha * 4 + R(((b > 0 ? d / b : 0) - 70) / 1430, 1)) / 5;
 			this.ta = a;
-			this.ua = c
+			this.ua = c;
 		};
 		h.ab = function() {
-			if (this.Ia) this.Ia = !1;
-			else for (var a = 0, b; b = this.J[a++];) {
-				var c;
-				c = this.qa;
-				var d = this.ra,
-					e = b.Ra,
-					f = b.Qa,
-					i = d.y - c.y,
-					n = f.y - e.y,
-					k = c.x - d.x,
-					l = e.x - f.x,
-					q = d.x * c.y - c.x * d.y,
-					M = f.x * e.y - e.x * f.y,
-					X = i * l - n * k;
-				X == 0 ? c = g : (k = (k * M - l * q) / X, i = (n * q - i * M) / X, c = Math.pow(k - d.x, 2) + Math.pow(i - d.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - c.x, 2) + Math.pow(i - c.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - f.x, 2) + Math.pow(i - f.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) || Math.pow(k - e.x, 2) + Math.pow(i - e.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) ? g : new Q(k, i));
-				c && !b.L && (this.ha < 0.4 ? b.Ya(c.x, c.y) : b.Ma(c.x, c.y, !1))
-			}
+			if (this.Ia)
+                this.Ia = false;
+			else {
+                for (var a = 0, b; b = this.J[a++];) {
+    				var c;
+    				c = this.qa;
+    				var d = this.ra,
+    					e = b.Ra,
+    					f = b.Qa,
+    					i = d.y - c.y,
+    					n = f.y - e.y,
+    					k = c.x - d.x,
+    					l = e.x - f.x,
+    					q = d.x * c.y - c.x * d.y,
+    					M = f.x * e.y - e.x * f.y,
+    					X = i * l - n * k;
+    				X == 0 ? c = g : (k = (k * M - l * q) / X, i = (n * q - i * M) / X, c = Math.pow(k - d.x, 2) + Math.pow(i - d.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - c.x, 2) + Math.pow(i - c.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - f.x, 2) + Math.pow(i - f.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) || Math.pow(k - e.x, 2) + Math.pow(i - e.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) ? g : new Q(k, i));
+    				c && !b.L && (this.ha < 0.4 ? b.Ya(c.x, c.y) : b.Ma(c.x, c.y, false))
+    			}
 		};
 		h.V = function(a) {
 			a >= 0 && a < 12 && this.J[a].V()
@@ -429,7 +596,7 @@
 				this.w = Ea(this.na);
 				this.da = Ea(this.Ba);
 				this.B = this.k = 0;
-				this.Z = this.O = this.L = !1;
+				this.Z = this.O = this.L = false;
 				this.oa = 1;
 				this.i = l;
 				this.Y = q;
@@ -463,8 +630,8 @@
 					b = this.Aa - this.I;
 				this.H += a * 0.8;
 				this.I += b * 0.8;
-				if (Math.abs(a) < 2 && Math.abs(b) < 2) this.$ = 0, this.oa = 1, this.Z = !1, (a >= 0 ? 1 : -1) != (this.ba >= 0 ? 1 : -1) && (this.oa *= -1)
-			} else if (this.color = [this.w[0] + (this.da[0] - this.w[0]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[1] + (this.da[1] - this.w[1]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[2] + (this.da[2] - this.w[2]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[3] + (this.da[3] - this.w[3]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25))], this.aa = "rgb(" + Math.round(this.color[0]) + "," + Math.round(this.color[1]) + "," + Math.round(this.color[2]) + ")", this.$ += this.Ta * this.oa, a = Math.sin(this.$), this.k *= this.Sa, this.W = this.P + a * this.ba * this.k, this.X = this.Q - a * this.ma * this.k, this.k <= 0.15) this.k = 0, this.O = !1, this.color = this.w, this.aa = this.na, this.v.Va()
+				if (Math.abs(a) < 2 && Math.abs(b) < 2) this.$ = 0, this.oa = 1, this.Z = false, (a >= 0 ? 1 : -1) != (this.ba >= 0 ? 1 : -1) && (this.oa *= -1)
+			} else if (this.color = [this.w[0] + (this.da[0] - this.w[0]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[1] + (this.da[1] - this.w[1]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[2] + (this.da[2] - this.w[2]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[3] + (this.da[3] - this.w[3]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25))], this.aa = "rgb(" + Math.round(this.color[0]) + "," + Math.round(this.color[1]) + "," + Math.round(this.color[2]) + ")", this.$ += this.Ta * this.oa, a = Math.sin(this.$), this.k *= this.Sa, this.W = this.P + a * this.ba * this.k, this.X = this.Q - a * this.ma * this.k, this.k <= 0.15) this.k = 0, this.O = false, this.color = this.w, this.aa = this.na, this.v.Va()
 		};
 		h.Na = function() {
 			var a = this.v.T(),
@@ -500,17 +667,17 @@
 			this.Fa(this.B, this.v.Ha(a))
 		};
 		h.V = function() {
-			this.Ma(this.P, this.Q, !0)
+			this.Ma(this.P, this.Q, true)
 		};
 		h.Ya = function(a, b) {
-			this.L = !0;
-			this.v.U = !0;
+			this.L = true;
+			this.v.U = true;
 			this.H = a;
 			this.I = b;
 			this.Na()
 		};
 		h.Wa = function() {
-			this.L = !1;
+			this.L = false;
 			this.W = this.P;
 			this.X = this.Q;
 			this.k = this.B * this.o;
@@ -518,17 +685,17 @@
 			this.Ga()
 		};
 		h.Ga = function() {
-			this.v.U = !0;
+			this.v.U = true;
 			this.za = this.z + this.M * this.R;
 			this.Aa = this.A + this.M * this.S;
 			this.$ = 0;
-			this.Z = this.O = !0
+			this.Z = this.O = true
 		};
 		h.Fa = function(a, b) {
 			if (r) try {
 				s.playTrack("guitar-" + (this.ga < 10 ? "0" : "") + this.ga, this.ga, 0.4 + (0.6 - 0.4) * a, -0.8 + 1.6 * b)
 			} catch (c) {
-				r = !1
+				r = false;
 			}
 			B && B([this.index - 1])
 		};
@@ -536,14 +703,14 @@
 				if (r) for (var a = 0; a < 12; a++) if (r) try {
 					s.stopChannel(a)
 				} catch (b) {
-					r = !1
+					r = false;
 				}
 			},
 			Ha = function() {
 				u && (Ga("guitar11-sound-player") || Ga("guitar11-sound-player-2"))
 			},
 			Ga = function(a) {
-				return (a = u.getElementById(a)) && a.playTrack ? (s = a, r = !0, Ia(), !0) : !1
+				return (a = u.getElementById(a)) && a.playTrack ? (s = a, r = true, Ia(), true) : false;
 			},
 			S = function(a, b) {
 				if (a < b) return -1;
@@ -556,21 +723,21 @@
 				return a.join(".")
 			},
 			Ja = function() {
-				var a = !1,
+				var a = false,
 					b = "";
 				if (navigator.plugins && navigator.plugins.length) {
 					var c = navigator.plugins["Shockwave Flash"];
-					c && (a = !0, c.description && (b = T(c.description)));
-					navigator.plugins["Shockwave Flash 2.0"] && (a = !0, b = "2.0.0.11")
+					c && (a = true, c.description && (b = T(c.description)));
+					navigator.plugins["Shockwave Flash 2.0"] && (a = true, b = "2.0.0.11")
 				} else if (navigator.mimeTypes && navigator.mimeTypes.length)(a = (c = navigator.mimeTypes["application/x-shockwave-flash"]) && c.enabledPlugin) && (b = T(c.enabledPlugin.description));
 				else try {
-					c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7"), a = !0, b = T(c.GetVariable("$version"))
+					c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7"), a = true, b = T(c.GetVariable("$version"))
 				} catch (d) {
 					try {
-						c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6"), a = !0, b = "6.0.21"
+						c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6"), a = true, b = "6.0.21"
 					} catch (e) {
 						try {
-							c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash"), a = !0, b = T(c.GetVariable("$version"))
+							c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash"), a = true, b = T(c.GetVariable("$version"))
 						} catch (f) {}
 					}
 				}
@@ -669,14 +836,14 @@
 				return d
 			},
 			Pa = function(a) {
-				for (var b = [], c = 0; c < 10; ++c) b.push(!1);
-				for (c = 0; c < a.length; ++c) b[a[c]] = !0;
+				for (var b = [], c = 0; c < 10; ++c) b.push(false);
+				for (c = 0; c < a.length; ++c) b[a[c]] = true;
 				return b
 			};
 		Y.prototype.xa = function() {
 			var a = [];
-			this.N.length == 1 ? (a.push(!1), a = a.concat(Z(this.N[0], 4))) : (a.push(!0), a = a.concat(Pa(this.N)));
-			this.duration < Math.pow(2, 5) ? (a.push(!1), a = a.concat(Z(this.duration, 5))) : (a.push(!0), a = a.concat(Z(this.duration, 20)));
+			this.N.length == 1 ? (a.push(false), a = a.concat(Z(this.N[0], 4))) : (a.push(true), a = a.concat(Pa(this.N)));
+			this.duration < Math.pow(2, 5) ? (a.push(false), a = a.concat(Z(this.duration, 5))) : (a.push(true), a = a.concat(Z(this.duration, 20)));
 			return a
 		};
 		var Qa = function(a, b) {
@@ -729,10 +896,10 @@
 		L.prototype.ib = function() {
 			this.wa = 0;
 			this.K = [];
-			this.cb = !0;
+			this.cb = true;
 			var a = this;
 			this.va = window.setTimeout(function() {
-				a.tick(!0)
+				a.tick(true)
 			}, 50);
 			return function(b) {
 				a.K.push(b)
@@ -762,15 +929,15 @@
 			if (a) {
 				var i = this;
 				this.va = window.setTimeout(function() {
-					i.tick(!0)
+					i.tick(true)
 				}, 50)
 			}
 		};
 		L.prototype.stop = function() {
 			window.clearTimeout(this.va);
-			this.tick(!1);
+			this.tick(false);
 			if (this.u.length > 0) this.u[0].duration = 0;
-			this.cb = !1
+			this.cb = false;
 		};
 		L.prototype.play = function(a) {
 			if (j == 5) if (this.duration > 28E3) j == 5 && F(4);
@@ -789,7 +956,7 @@
 		eval("google.doodle.mod = (function(a,n){return a" + "%%".charAt(0) + "n;})");
 		L.prototype.xa = function() {
 			for (var a = [], b = 0; b < this.u.length; ++b) a = a.concat(this.u[b].xa());
-			for (window.bits = a; google.doodle.mod(a.length, 8) != 0;) a.push(!1);
+			for (window.bits = a; google.doodle.mod(a.length, 8) != 0;) a.push(false);
 			return a
 		};
 		L.prototype.eb = function() {
@@ -875,25 +1042,25 @@
 					}
 				}
 			},
-			Wa = !0,
+			Wa = true,
 			Xa = function() {
-				if (google.rein && google.dstr && !google.doodle.jb) google.doodle.jb = !0, google.rein.push(Xa), google.dstr.push($);
+				if (google.rein && google.dstr && !google.doodle.jb) google.doodle.jb = true, google.rein.push(Xa), google.dstr.push($);
 				if (document.getElementById("hplogo")) {
 					$();
 					google.psy && google.psy.q && google.msg && google.msg.listen(22, function() {
 						$();
-						return !0
+						return true
 					});
 					google.doodle.url = na;
 					p = document.getElementById("hplogo-g");
 					v = document.createElement("canvas");
-					v.getContext ? (v.width = 474, v.height = 175, v.hideFocus = !0, ca = v.getContext("2d"), p.appendChild(v)) : v = g;
+					v.getContext ? (v.width = 474, v.height = 175, v.hideFocus = true, ca = v.getContext("2d"), p.appendChild(v)) : v = g;
 					xa();
 					o = new Ca(ca, p);
 					var a;
-					r = !1;
+					r = false;
 					Ja();
-					if (!aa || !Ka()) a = !1;
+					if (!aa || !Ka()) a = false;
 					else {
 						google.doodle.flashLoaded = Ha;
 						t = document.createElement("iframe");
@@ -904,22 +1071,34 @@
 						t.style.width = "100px";
 						t.style.height = "100px";
 						document.getElementById("hplogo").appendChild(t);
-						u = t.contentDocument;
-						if (u == void 0 || u == g) u = t.contentWindow.document;
-						u.open();
-						u.write("<html><head></head><body><object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"0\" height=\"0\" id=\"guitar11-sound-player\" type=\"application/x-shockwave-flash\"><param name=\"movie\" value=\"/google_lespaul/src/guitar11.swf\"><param name=\"allowScriptAccess\" value=\"always\"><object id=\"guitar11-sound-player-2\" type=\"application/x-shockwave-flash\" data=\"/google_lespaul/src/guitar11.swf\" width=\"0\" height=\"0\"><param name=\"allowScriptAccess\" value=\"always\"></object></object></body></html>");
-						u.close();
-						a = !0
+						
+                        u = t.contentDocument;
+						
+                        if (u == void 0 || u == g)
+                            u = t.contentWindow.document;
+						
+                        u.open();
+                        
+                        slashPos = location.href.lastIndexOf('/');
+                        relPath = location.href.substr(0, slashPos);
+                        
+                        relPath += "/src/";
+						
+                        u.write("<html><head></head><body><object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"0\" height=\"0\" id=\"guitar11-sound-player\" type=\"application/x-shockwave-flash\"><param name=\"movie\" value=\"");
+                        u.write(relPath + "guitar11.swf\"><param name=\"allowScriptAccess\" value=\"always\"><object id=\"guitar11-sound-player-2\" type=\"application/x-shockwave-flash\" data=\"" + relPath + "guitar11.swf\" width=\"0\" height=\"0\"><param name=\"allowScriptAccess\" value=\"always\"></object></object></body></html>");
+						
+                        u.close();
+						a = true
 					}
 					var b = document.getElementById("hplogot");
 					b && (sa = typeof b.style.opacity != "undefined");
 					za();
 					Ya();
 					!a && Wa && Ia();
-					Wa = !1;
+					Wa = false;
 					ra();
 					if (ea) try {
-						document.execCommand("BackgroundImageCache", !1, !0)
+						document.execCommand("BackgroundImageCache", false, true)
 					} catch (c) {}
 				}
 			},
@@ -939,7 +1118,7 @@
 					Fa();
 					ja();
 					o && (o.ya(), o = g);
-					t && (C(t), t = g, r = !1);
+					t && (C(t), t = g, r = false);
 					v && (C(v), v = g);
 					A && A.stop();
 					B = A = g;
@@ -960,7 +1139,7 @@
 		};
 		google.x ? google.x("DOODLE", Xa) : Xa()
 	} catch (Za) {
-		google.ml(Za, !1, {
+		google.ml(Za, false, {
 			cause: "DOODLE"
 		})
 	};
