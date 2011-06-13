@@ -2,6 +2,7 @@
 	var g = null,
 		h;
 	try {
+		if(!window.google) window.google = {};
 		if (!google.doodle) google.doodle = {};
 		
 		var j, m, o, p, r, s, aa, t, u, ba, v, ca, da, ea = navigator.userAgent.indexOf("MSIE") >= 0,
@@ -212,13 +213,6 @@
 				D(document, "touchmove", P);
 				D(document, "touchstart", wa);
 				D(window, "resize", xa);
-				var a = document.forms.f || document.forms.gs || document.forms.lb;
-				a && (D(a.q, "blur", function() {
-					m = !1
-				}), D(a.q, "focus", function() {
-					m = !0;
-					j != 5 && F(0)
-				}));
 				D(document.body, "mouseout", ya);
 				if (a = document.getElementById("hplogo-on")) a.onclick = ka, a.style.cursor = "pointer";
 				if (a = document.getElementById("hplogo-led")) a.onclick = ka, a.style.cursor = "pointer";
@@ -283,7 +277,7 @@
 			},
 			va = function(a) {
 				var b = a || window.event;
-				return o && !m && !b.altKey && !b.ctrlKey && !b.metaKey && (b = Ba[b.keyCode], typeof b == "number") ? (j == 0 && F(4), o.V(b), E(a)) : !0
+				return o && !b.altKey && !b.ctrlKey && !b.metaKey && (b = Ba[b.keyCode], typeof b == "number") ? (j == 0 && F(4), o.V(b), E(a)) : !0
 			},
 			xa = function() {
 				y && p != g && (y = !1, window.setTimeout(function() {
@@ -920,7 +914,6 @@
 					var b = document.getElementById("hplogot");
 					b && (sa = typeof b.style.opacity != "undefined");
 					za();
-					m = !0;
 					Ya();
 					!a && Wa && Ia();
 					Wa = !1;
