@@ -533,35 +533,52 @@
                 this.Ia = false;
 			else {
                 for (var a = 0, b; b = this.J[a++];) {
-    				var c;
-    				c = this.qa;
-    				var d = this.ra,
-    					e = b.Ra,
-    					f = b.Qa,
-    					i = d.y - c.y,
-    					n = f.y - e.y,
-    					k = c.x - d.x,
-    					l = e.x - f.x,
-    					q = d.x * c.y - c.x * d.y,
-    					M = f.x * e.y - e.x * f.y,
-    					X = i * l - n * k;
-    				X == 0 ? c = g : (k = (k * M - l * q) / X, i = (n * q - i * M) / X, c = Math.pow(k - d.x, 2) + Math.pow(i - d.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - c.x, 2) + Math.pow(i - c.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - f.x, 2) + Math.pow(i - f.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) || Math.pow(k - e.x, 2) + Math.pow(i - e.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) ? g : new Q(k, i));
-    				c && !b.L && (this.ha < 0.4 ? b.Ya(c.x, c.y) : b.Ma(c.x, c.y, false))
-    			}
+                    var c;
+                    c = this.qa;
+                    var d = this.ra,
+                        e = b.Ra,
+                        f = b.Qa,
+                        i = d.y - c.y,
+                        n = f.y - e.y,
+                        k = c.x - d.x,
+                        l = e.x - f.x,
+                        q = d.x * c.y - c.x * d.y,
+                        M = f.x * e.y - e.x * f.y,
+                        X = i * l - n * k;
+                    
+                    if (X === 0)
+                        c = g;
+                    else {
+                        k = (k * M - l * q) / X;
+                        i = (n * q - i * M) / X;
+                        c = Math.pow(k - d.x, 2) + Math.pow(i - d.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - c.x, 2) + Math.pow(i - c.y, 2) > Math.pow(c.x - d.x, 2) + Math.pow(c.y - d.y, 2) || Math.pow(k - f.x, 2) + Math.pow(i - f.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) || Math.pow(k - e.x, 2) + Math.pow(i - e.y, 2) > Math.pow(e.x - f.x, 2) + Math.pow(e.y - f.y, 2) ? g : new Q(k, i);
+                    }
+                    c && !b.L && (this.ha < 0.4 ? b.Ya(c.x, c.y) : b.Ma(c.x, c.y, false))
+                }
+			}
 		};
 		h.V = function(a) {
-			a >= 0 && a < 12 && this.J[a].V()
+			if (a >= 0 && a < 12)
+                this.J[a].V();
 		};
 		var R = function(a, b) {
-				return a < 0 ? 0 : a > b ? b : a
+                if (a < 0)
+                    return 0;
+                else {
+                    if (a > b)
+                        return b;
+                    else
+                        return a;
+                }
 			},
 			Ea = function(a) {
-				for (var b = [], a = a.match(/[0-9a-f]{2}/gi), c = 0, d; d = a[c++];) b.push(parseInt(d, 16));
-				return b
+				for (var b = [], a = a.match(/[0-9a-f]{2}/gi), c = 0, d; d = a[c++];)
+                    b.push(parseInt(d, 16));
+				return b;
 			},
 			Q = function(a, b) {
 				this.x = a;
-				this.y = b
+				this.y = b;
 			},
 			Da = function(a, b, c, d, e, f, i, n, k, l, q, M) {
 				this.z = a;
@@ -605,23 +622,70 @@
 				this.Sa = 0.88 + (0.85 - 0.88) * this.Da;
 				this.Ta = 1.4 + 1.5 * this.Da;
 				this.$ = 0;
-				if (!this.i) this.G = document.createElement("div"), this.G.className = "hplogo-str", this.G.style.left = this.z + 1 + "px", this.G.style.top = this.A - 10 + "px", this.G.style.width = this.length, this.Ua = e ? -475 : -730, this.Y.appendChild(this.G)
+                
+				if (!this.i) {
+                    this.G = document.createElement("div");
+                    this.G.className = "hplogo-str";
+                    this.G.style.left = this.z + 1 + "px";
+                    this.G.style.top = this.A - 10 + "px";
+                    this.G.style.width = this.length;
+                    this.Ua = e ? -475 : -730;
+                    this.Y.appendChild(this.G);
+				}
 			};
 		h = Da.prototype;
 		h.ya = function() {
-			if (this.G) this.Y.removeChild(this.G), this.G = g
+			if (this.G) {
+                this.Y.removeChild(this.G);
+                this.G = g;
+			}
 		};
 		h.gb = function() {
 			var a, b;
-			(this.L || this.Z) && this.H && this.I ? (a = this.H, b = this.I) : (a = this.W, b = this.X);
+            
+			if ((this.L || this.Z) && this.H && this.I) {
+                a = this.H;
+                b = this.I;
+			}
+            else {
+                a = this.W;
+                b = this.X;
+            }
+            
 			var c = a - this.z,
 				d = b - this.A,
 				e = this.ea - a,
 				f = this.fa - b;
-			this.i ? (this.i.beginPath(), this.i.lineCap = "round", this.i.strokeStyle = this.aa, this.i.lineWidth = this.lineWidth, this.i.shadowOffsetX = 2, this.i.shadowOffsetY = 3, this.i.shadowBlur = 2, this.i.shadowColor = "rgba(0, 0, 0, 0.35)", c = Math.sqrt(c * c + d * d), f = Math.sqrt(e * e + f * f), e = 0.45 * c * this.ma, c = 0.45 * c * this.ba, d = 0.45 * f * this.ma, f = 0.45 * f * this.ba, this.i.moveTo(this.z, this.A), this.i.bezierCurveTo(a - e, b - c, a + d, b + f, this.ea, this.fa), this.i.stroke(), this.i.closePath()) : this.G.style.backgroundPosition = this.Ua + "px " + -(3 + Math.round(d / 2)) * 20 + "px"
+            
+			if (this.i) {
+                this.i.beginPath();
+                this.i.lineCap = "round";
+                this.i.strokeStyle = this.aa;
+                this.i.lineWidth = this.lineWidth;
+                this.i.shadowOffsetX = 2;
+                this.i.shadowOffsetY = 3;
+                this.i.shadowBlur = 2;
+                this.i.shadowColor = "rgba(0, 0, 0, 0.35)";
+                c = Math.sqrt(c * c + d * d);
+                f = Math.sqrt(e * e + f * f);
+                e = 0.45 * c * this.ma;
+                c = 0.45 * c * this.ba;
+                d = 0.45 * f * this.ma;
+                f = 0.45 * f * this.ba;
+                this.i.moveTo(this.z, this.A);
+                this.i.bezierCurveTo(a - e, b - c, a + d, b + f, this.ea, this.fa);
+                this.i.stroke();
+                this.i.closePath();
+			}
+            else {
+                this.G.style.backgroundPosition = this.Ua + "px " + -(3 + Math.round(d / 2)) * 20 + "px";
+			}
 		};
 		h.hb = function() {
-			this.L ? this.Na() : this.O && this.db()
+			if (this.L)
+                this.Na();
+            else if (this.O)
+                this.db();
 		};
 		h.db = function() {
 			if (this.Z) {
@@ -630,31 +694,63 @@
 					b = this.Aa - this.I;
 				this.H += a * 0.8;
 				this.I += b * 0.8;
-				if (Math.abs(a) < 2 && Math.abs(b) < 2) this.$ = 0, this.oa = 1, this.Z = false, (a >= 0 ? 1 : -1) != (this.ba >= 0 ? 1 : -1) && (this.oa *= -1)
-			} else if (this.color = [this.w[0] + (this.da[0] - this.w[0]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[1] + (this.da[1] - this.w[1]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[2] + (this.da[2] - this.w[2]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[3] + (this.da[3] - this.w[3]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25))], this.aa = "rgb(" + Math.round(this.color[0]) + "," + Math.round(this.color[1]) + "," + Math.round(this.color[2]) + ")", this.$ += this.Ta * this.oa, a = Math.sin(this.$), this.k *= this.Sa, this.W = this.P + a * this.ba * this.k, this.X = this.Q - a * this.ma * this.k, this.k <= 0.15) this.k = 0, this.O = false, this.color = this.w, this.aa = this.na, this.v.Va()
+				if (Math.abs(a) < 2 && Math.abs(b) < 2) {
+                    this.$ = 0;
+                    this.oa = 1;
+                    this.Z = false;
+                    if ((a >= 0 ? 1 : -1) != (this.ba >= 0 ? 1 : -1))
+                        (this.oa *= -1);
+				}
+			}
+            else {
+                this.color = [this.w[0] + (this.da[0] - this.w[0]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[1] + (this.da[1] - this.w[1]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[2] + (this.da[2] - this.w[2]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25)), this.w[3] + (this.da[3] - this.w[3]) * (this.k > this.o * 0.25 ? 1 : this.k / (this.o * 0.25))];
+                this.aa = "rgb(" + Math.round(this.color[0]) + "," + Math.round(this.color[1]) + "," + Math.round(this.color[2]) + ")";
+                this.$ += this.Ta * this.oa;
+                this.a = Math.sin(this.$);
+                this.k *= this.Sa;
+                this.W = this.P + this.a * this.ba * this.k;
+                this.X = this.Q - this.a * this.ma * this.k;
+                
+                if (this.color && this.aa && this.$ && this.a && this.k && this.W && this.X && this.k <= 0.15) {
+                    this.k = 0;
+                    this.O = false;
+                    this.color = this.w;
+                    this.aa = this.na;
+                    this.v.Va();
+                }
+            }
 		};
 		h.Na = function() {
 			var a = this.v.T(),
 				b = this.v.ia(),
 				c = a - this.z,
 				d = b - this.A,
-				e = this.ca - Math.atan2(d, c),
-				c = Math.sqrt(c * c + d * d);
+				e = this.ca - Math.atan2(d, c);
+            
+			c = Math.sqrt(c * c + d * d);
+            
 			this.F = c * Math.sin(e);
 			this.Ea(R(c * Math.cos(e) / this.length, 1));
 			this.B = R(Math.abs(this.F) / this.o, 1);
-			Math.abs(this.F) > this.la ? this.Wa() : (this.H = a, this.I = b)
+			if (Math.abs(this.F) > this.la)
+                this.Wa();
+            else {
+                this.H = a;
+                this.I = b;
+            }
 		};
 		h.Ea = function(a) {
 			this.M = a;
 			this.Ca = this.M <= 0.5 ? this.M / 0.5 : 1 - (this.M - 0.5) / 0.5;
-			this.la = this.o * this.Ca
+			this.la = this.o * this.Ca;
 		};
 		h.Ma = function(a, b, c) {
 			this.H = a;
 			this.I = b;
-			var b = this.v.T() - this.z,
-				d = this.v.ia() - this.A;
+			b = this.v.T() - this.z;
+            
+			var d = this.v.ia() - this.A;
+            
 			this.Ea(R(Math.sqrt(b * b + d * d) / this.length, 1));
 			this.F = (1 - (c ? 1 : this.v.ha)) * this.la;
 			this.B = c ? 1 : R(Math.abs(this.F) / this.o, 1);
@@ -663,18 +759,25 @@
 			this.I += this.F * this.Pa;
 			this.W = this.P;
 			this.X = this.Q;
-			this.O ? (this.B = R(this.B / 2 + this.k / this.o, 1), this.k = this.B * this.o) : (this.k = this.B * this.o, this.Ga());
-			this.Fa(this.B, this.v.Ha(a))
+			if (this.O) {
+                this.B = R(this.B / 2 + this.k / this.o, 1);
+                this.k = this.B * this.o;
+			}
+            else {
+                this.k = this.B * this.o;
+                this.Ga();
+            }
+			this.Fa(this.B, this.v.Ha(a));
 		};
 		h.V = function() {
-			this.Ma(this.P, this.Q, true)
+			this.Ma(this.P, this.Q, true);
 		};
 		h.Ya = function(a, b) {
 			this.L = true;
 			this.v.U = true;
 			this.H = a;
 			this.I = b;
-			this.Na()
+			this.Na();
 		};
 		h.Wa = function() {
 			this.L = false;
@@ -682,67 +785,102 @@
 			this.X = this.Q;
 			this.k = this.B * this.o;
 			this.Fa(this.B, this.v.Ha(this.v.T()));
-			this.Ga()
+			this.Ga();
 		};
 		h.Ga = function() {
 			this.v.U = true;
 			this.za = this.z + this.M * this.R;
 			this.Aa = this.A + this.M * this.S;
 			this.$ = 0;
-			this.Z = this.O = true
+			this.Z = this.O = true;
 		};
 		h.Fa = function(a, b) {
-			if (r) try {
-				s.playTrack("guitar-" + (this.ga < 10 ? "0" : "") + this.ga, this.ga, 0.4 + (0.6 - 0.4) * a, -0.8 + 1.6 * b)
-			} catch (c) {
-				r = false;
+			if (r) {
+                try {
+				    s.playTrack("guitar-" + (this.ga < 10 ? "0" : "") + this.ga, this.ga, 0.4 + (0.6 - 0.4) * a, -0.8 + 1.6 * b);
+                } catch (c) {
+                    r = false;
+                }
 			}
-			B && B([this.index - 1])
+            
+			if (B)
+                B([this.index - 1]);
 		};
 		var Fa = function() {
 				if (r) for (var a = 0; a < 12; a++) if (r) try {
-					s.stopChannel(a)
+					s.stopChannel(a);
 				} catch (b) {
 					r = false;
 				}
 			},
 			Ha = function() {
-				u && (Ga("guitar11-sound-player") || Ga("guitar11-sound-player-2"))
+				if (u)
+                    Ga("guitar11-sound-player") || Ga("guitar11-sound-player-2");
 			},
 			Ga = function(a) {
-				return (a = u.getElementById(a)) && a.playTrack ? (s = a, r = true, Ia(), true) : false;
+                if (a = u.getElementById(a) && a.playTrack) {
+                    s = a;
+                    r = true;
+                    Ia();
+                    return true;
+                }
+                else
+                    return false;
 			},
 			S = function(a, b) {
-				if (a < b) return -1;
-				else if (a > b) return 1;
-				return 0
+				if (a < b)
+                    return -1;
+				else if (a > b)
+                    return 1;
+				
+                return 0;
 			},
 			T = function(a) {
 				a = a.match(/[\d]+/g);
 				a.length = 3;
-				return a.join(".")
+				return a.join(".");
 			},
 			Ja = function() {
 				var a = false,
 					b = "";
 				if (navigator.plugins && navigator.plugins.length) {
 					var c = navigator.plugins["Shockwave Flash"];
-					c && (a = true, c.description && (b = T(c.description)));
-					navigator.plugins["Shockwave Flash 2.0"] && (a = true, b = "2.0.0.11")
-				} else if (navigator.mimeTypes && navigator.mimeTypes.length)(a = (c = navigator.mimeTypes["application/x-shockwave-flash"]) && c.enabledPlugin) && (b = T(c.enabledPlugin.description));
-				else try {
-					c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7"), a = true, b = T(c.GetVariable("$version"))
-				} catch (d) {
-					try {
-						c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6"), a = true, b = "6.0.21"
-					} catch (e) {
-						try {
-							c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash"), a = true, b = T(c.GetVariable("$version"))
-						} catch (f) {}
+					if (c) {
+                        a = true;
+                        if (c.description)
+                            b = T(c.description);
+					}
+					if (navigator.plugins["Shockwave Flash 2.0"]) {
+                        a = true;
+                        b = "2.0.0.11";
 					}
 				}
+                else if (navigator.mimeTypes && navigator.mimeTypes.length) {
+                    if (a = (c = navigator.mimeTypes["application/x-shockwave-flash"]) && c.enabledPlugin)
+                        b = T(c.enabledPlugin.description);
+                }
+				else {
+                        try {
+                            c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.7");
+                            a = true;
+                            b = T(c.GetVariable("$version"))
+                        } catch (d) {
+                            try {
+                                c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash.6");
+                                a = true;
+                                b = "6.0.21";
+                            } catch (e) {
+                                try {
+                                    c = new ActiveXObject("ShockwaveFlash.ShockwaveFlash");
+                                    a = true;
+                                    b = T(c.GetVariable("$version"));
+                                } catch (f) {}
+                        }
+                    }
+				}
+                
 				aa = a;
-				ba = b
+				ba = b;
 			},
 			Ka = function() {
 				for (var a = 0, b = String(ba).replace(/^[\s\xa0]+|[\s\xa0]+$/g, "").split("."), c = String("9.0.0.0").replace(/^[\s\xa0]+|[\s\xa0]+$/g, "").split("."), d = Math.max(b.length, c.length), e = 0; a == 0 && e < d; e++) {
@@ -750,14 +888,20 @@
 						i = c[e] || "",
 						n = RegExp("(\\d*)(\\D*)", "g"),
 						k = RegExp("(\\d*)(\\D*)", "g");
+                    
 					do {
 						var l = n.exec(f) || ["", "", ""],
 							q = k.exec(i) || ["", "", ""];
-						if (l[0].length == 0 && q[0].length == 0) break;
-						a = S(l[1].length == 0 ? 0 : parseInt(l[1], 10), q[1].length == 0 ? 0 : parseInt(q[1], 10)) || S(l[2].length == 0, q[2].length == 0) || S(l[2], q[2])
-					} while (a == 0)
+                            
+						if (l[0].length === 0 && q[0].length === 0)
+                            break;
+                        
+						a = S(l[1].length === 0 ? 0 : parseInt(l[1], 10), q[1].length == 0 ? 0 : parseInt(q[1], 10)) || S(l[2].length == 0, q[2].length == 0) || S(l[2], q[2])
+					}
+                    while (a == 0)
 				}
-				return a >= 0
+                
+				return a >= 0;
 			},
 			U, La = {
 				c: 2,
@@ -783,26 +927,38 @@
 			},
 			Ma = function(a, b) {
 				if (!(typeof a != "number" || typeof b != "string")) {
-					U !== void 0 && window.clearInterval(U);
+					if (U !== void 0)
+                        window.clearInterval(U);
+                    
 					var c = Math.floor(6E4 / a);
+                    
 					if (!(c < 30) && !(6E4 * (b.replace("[", "").replace("]", "").length / a) > 28E3)) {
 						var d = 0;
 						F(5);
 						U = window.setInterval(function() {
-							d >= b.length && j == 5 && F(4);
-							if (j != 5) window.clearInterval(U);
+							if (d >= b.length && j == 5)
+                                F(4);
+                            
+							if (j != 5)
+                                window.clearInterval(U);
 							else {
 								var a = b.charAt(d++);
 								if (a != "-") {
 									var c = [];
 									if (a == "[") {
 										for (; d < b.length && b.charAt(d) != "]";) c.push(b.charAt(d++));
-										d++
-									} else c.push(a);
-									for (var a = 0, i; i = c[a++];) La.hasOwnProperty(i) && o.V(La[i])
+										d++;
+									}
+                                    else
+                                        c.push(a);
+                                    
+									for (var a = 0, i; i = c[a++];) {
+                                        La.hasOwnProperty(i);
+                                        o.V(La[i]);
+									}
 								}
 							}
-						}, c)
+						}, c);
 					}
 				}
 			},
@@ -812,7 +968,10 @@
 				if (!V) {
 					V = {};
 					W = {};
-					for (var a = 0; a < 65; a++) V[a] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_*".charAt(a), W[V[a]] = a
+					for (var a = 0; a < 65; a++) {
+                        V[a] = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789-_*".charAt(a);
+                        W[V[a]] = a;
+					}
 				}
 			},
 			Y = function(a, b) {
@@ -821,24 +980,38 @@
 				var c = 0;
 				c += this.N.length == 1 ? 5 : 11;
 				c += this.duration < Math.pow(2, 5) ? 6 : 21;
-				this.size = c
+				this.size = c;
 			};
 		Y.prototype.play = function() {
-			for (var a = 0; a < this.N.length; ++a) o.V(this.N[a])
+			for (var a = 0; a < this.N.length; ++a)
+                o.V(this.N[a]);
 		};
 		var Z = function(a, b) {
-				for (var c = [], d = 0; d < b; ++d) c.push( !! (a & 1)), a >>= 1;
-				return c
+				for (var c = [], d = 0; d < b; ++d) {
+                    c.push( !! (a & 1));
+                    a >>= 1;
+                }
+                
+				return c;
 			},
 			Oa = function(a, b, c) {
-				if (b + c > a.length) return -1;
-				for (var d = 0, e = 0; e < c; ++e) d *= 2, d |= a[b + c - e - 1] ? 1 : 0;
-				return d
+				if (b + c > a.length)
+                    return -1;
+				for (var d = 0, e = 0; e < c; ++e) {
+                    d *= 2;
+                    d |= a[b + c - e - 1] ? 1 : 0;
+				}
+				
+                return d;
 			},
 			Pa = function(a) {
-				for (var b = [], c = 0; c < 10; ++c) b.push(false);
-				for (c = 0; c < a.length; ++c) b[a[c]] = true;
-				return b
+				for (var b = [], c = 0; c < 10; ++c)
+                    b.push(false);
+                
+				for (c = 0; c < a.length; ++c)
+                    b[a[c]] = true;
+				
+                return b;
 			};
 		Y.prototype.xa = function() {
 			var a = [];
@@ -887,11 +1060,13 @@
 		};
 		var Ra = g,
 			Sa = function() {
-				j == 1 && F(2)
+				if (j == 1)
+                    F(2);
 			},
 			Ta = g,
 			Ua = function() {
-				(j == 1 || j == 2) && F(4)
+				if (j == 1 || j == 2)
+                    F(4);
 			};
 		L.prototype.ib = function() {
 			this.wa = 0;
@@ -899,10 +1074,10 @@
 			this.cb = true;
 			var a = this;
 			this.va = window.setTimeout(function() {
-				a.tick(true)
+				a.tick(true);
 			}, 50);
 			return function(b) {
-				a.K.push(b)
+				a.K.push(b);
 			}
 		};
 		L.prototype.tick = function(a) {
@@ -911,20 +1086,37 @@
 				var b = this.wa;
 				this.wa = 0;
 				var c;
-				if (this.K.length == 1) c = this.K[0];
+				if (this.K.length == 1)
+                    c = this.K[0];
 				else {
-					for (var d = [], e = 0; c = this.K[e++];) for (var f = 0; f < c.length; ++f) d[c[f]] = 1;
+					for (var d = [], e = 0; c = this.K[e++];) {
+                        for (var f = 0; f < c.length; ++f)
+                            d[c[f]] = 1;
+					}
 					c = [];
-					for (e = 0; e < d.length; ++e) d[e] && c.push(e)
+					for (e = 0; e < d.length; ++e) {
+                        if (d[e])
+                            c.push(e);
+					}
 				}
 				this.K = [];
 				this.Za(new Y(c, b));
-				this.u.length == 1 && (window.clearTimeout(Ta), Ta = window.setTimeout(Ua, 28E3), window.clearTimeout(Ra), Ra = window.setTimeout(Sa, 23E3));
+				
+                if (this.u.length == 1) {
+                    window.clearTimeout(Ta);
+                    Ta = window.setTimeout(Ua, 28E3);
+                    window.clearTimeout(Ra);
+                    Ra = window.setTimeout(Sa, 23E3);
+                }
+                
 				b = this.$a();
+                
 				if (b >= 1900 || this.duration >= 28E3) {
 					F(4);
-					return
-				} else b >= 1800 && F(2)
+					return;
+				}
+                else if (b >= 1800)
+                    F(2);
 			}
 			if (a) {
 				var i = this;
@@ -940,33 +1132,51 @@
 			this.cb = false;
 		};
 		L.prototype.play = function(a) {
-			if (j == 5) if (this.duration > 28E3) j == 5 && F(4);
+			if (j == 5) {
+                if (this.duration > 28E3 && j == 5 )
+                    F(4);
+			}
 			else {
 				var b = a || 0;
 				b > 0 && this.u[b - 1].play();
-				if (b >= this.u.length) j == 5 && F(4);
+				if (b >= this.u.length && j == 5)
+                    F(4);
 				else {
 					var c = this;
 					window.setTimeout(function() {
-						c.play(b + 1)
-					}, this.u[b].duration * 50)
+						c.play(b + 1);
+					}, this.u[b].duration * 50);
 				}
 			}
 		};
 		eval("google.doodle.mod = (function(a,n){return a" + "%%".charAt(0) + "n;})");
 		L.prototype.xa = function() {
-			for (var a = [], b = 0; b < this.u.length; ++b) a = a.concat(this.u[b].xa());
-			for (window.bits = a; google.doodle.mod(a.length, 8) != 0;) a.push(false);
-			return a
+			for (var a = [], b = 0; b < this.u.length; ++b)
+                a = a.concat(this.u[b].xa());
+            
+			for (window.bits = a; google.doodle.mod(a.length, 8) != 0;)
+                a.push(false);
+            
+			return a;
 		};
 		L.prototype.eb = function() {
-			if (this.u.length == 0) return g;
+			if (this.u.length == 0)
+                return g;
+            
 			var a = "http://www.google.com/webhp?",
 				b = Va(window.location.toString()).hl;
-			b && (a += "hl=" + b + "&");
-			a += "tune=";
-			for (var c = this.xa(), b = [], d = 0; d < c.length; d += 8) {
-				for (var e = 0, f = 0; f < 8; ++f) e *= 2, e |= c[d + f] ? 1 : 0;
+            
+			if (b)
+                a += "hl=" + b + "&";
+			
+            a += "tune=";
+			
+            for (var c = this.xa(), b = [], d = 0; d < c.length; d += 8) {
+				for (var e = 0, f = 0; f < 8; ++f) {
+                    e *= 2;
+                    e |= c[d + f] ? 1 : 0;
+				}
+                
 				b.push(e)
 			}
 			Na();
@@ -984,21 +1194,27 @@
 				k || (l = 64, f || (n = 64));
 				d.push(c[q], c[i], c[n], c[l])
 			}
-			return a + d.join("")
+			return a + d.join("");
 		};
 		var Va = function(a) {
 				if (!a) return {};
 				for (var a = a.match(/\?[^#]*/), a = (a && a.length > 0 ? a[0].substr(1) : "").split("&"), b = {}, c = 0; c < a.length; ++c) {
 					var d = a[c];
-					d && (d = d.split("="), b[d[0]] = d[1] || "")
+					if (d) {
+                        d = d.split("=");
+                        b[d[0]] = d[1] || "";
+					}
 				}
-				return b
+				return b;
 			},
 			Ia = function() {
 				var a = Va(window.location.href),
 					b = parseInt(a.bpm, 10),
 					a = a.tune;
-				b && a && Ma(b, unescape(a));
+				
+                if (b && a)
+                    Ma(b, unescape(a));
+                
 				if (a) {
 					Na();
 					for (var c = W, b = [], d = 0; d < a.length;) {
@@ -1009,24 +1225,39 @@
 						++d;
 						var n = d < a.length ? c[a.charAt(d)] : 0;
 						++d;
-						if (e == g || f == g || i == g || n == g) throw Error();
-						b.push(e * 4 | f >> 4);
-						i != 64 && (b.push(f * 16 & 240 | i >> 2), n != 64 && b.push(i * 64 & 192 | n))
+						
+                        if (e == g || f == g || i == g || n == g) throw Error();
+						
+                        b.push(e * 4 | f >> 4);
+						
+                        if (i != 64) {
+                            b.push(f * 16 & 240 | i >> 2);
+                            if (n != 64)
+                                b.push(i * 64 & 192 | n);
+					    }
 					}
 					a = [];
 					for (c = 0; c < b.length; ++c) {
 						d = b[c];
-						for (e = 0; e < 8; ++e) a.push( !! (d & 128)), d *= 2
+						for (e = 0; e < 8; ++e) {
+                            a.push( !! (d & 128));
+                            d *= 2;
+						}
 					}
 					if (a) {
 						var k;
 						a: {
 							b = [];
 							c = 0;
+                            
 							try {
 								for (; a.length - c >= 8;) {
 									var l = Qa(a, c);
-									if (l) b.push(l.s), c += l.n;
+                                    
+									if (l) {
+                                        b.push(l.s);
+                                        c += l.n;
+									}
 									else {
 										k = g;
 										break a
@@ -1036,15 +1267,26 @@
 								k = g;
 								break a
 							}
-							k = new L(b)
+                            
+							k = new L(b);
 						}
-						k && (A = k, F(5), k.play())
+						
+                        if (k) {
+                            A = k;
+                            F(5);
+                            k.play();
+                        }
 					}
 				}
 			},
 			Wa = true,
 			Xa = function() {
-				if (google.rein && google.dstr && !google.doodle.jb) google.doodle.jb = true, google.rein.push(Xa), google.dstr.push($);
+				if (google.rein && google.dstr && !google.doodle.jb) {
+                    google.doodle.jb = true;
+                    google.rein.push(Xa);
+                    google.dstr.push($);
+				}
+                
 				if (document.getElementById("hplogo")) {
 					$();
 					google.psy && google.psy.q && google.msg && google.msg.listen(22, function() {
@@ -1060,7 +1302,9 @@
 					var a;
 					r = false;
 					Ja();
-					if (!aa || !Ka()) a = false;
+                    
+					if (!aa || !Ka())
+                        a = false;
 					else {
 						google.doodle.flashLoaded = Ha;
 						t = document.createElement("iframe");
@@ -1081,35 +1325,52 @@
                         
                         slashPos = location.href.lastIndexOf('/');
                         relPath = location.href.substr(0, slashPos);
-                        
                         relPath += "/src/";
 						
                         u.write("<html><head></head><body><object classid=\"clsid:d27cdb6e-ae6d-11cf-96b8-444553540000\" codebase=\"http://download.macromedia.com/pub/shockwave/cabs/flash/swflash.cab#version=9,0,0,0\" width=\"0\" height=\"0\" id=\"guitar11-sound-player\" type=\"application/x-shockwave-flash\"><param name=\"movie\" value=\"");
                         u.write(relPath + "guitar11.swf\"><param name=\"allowScriptAccess\" value=\"always\"><object id=\"guitar11-sound-player-2\" type=\"application/x-shockwave-flash\" data=\"" + relPath + "guitar11.swf\" width=\"0\" height=\"0\"><param name=\"allowScriptAccess\" value=\"always\"></object></object></body></html>");
 						
                         u.close();
-						a = true
+						a = true;
 					}
-					var b = document.getElementById("hplogot");
-					b && (sa = typeof b.style.opacity != "undefined");
+					
+					if (b = document.getElementById("hplogot"))
+                        sa = typeof b.style.opacity != "undefined";
+					
 					za();
-					Ya();
-					!a && Wa && Ia();
-					Wa = false;
-					ra();
-					if (ea) try {
-						document.execCommand("BackgroundImageCache", false, true)
-					} catch (c) {}
+					
+                    Ya();
+					
+                    if (!a && Wa)
+                        Ia();
+					
+                    Wa = false;
+					
+                    ra();
+                    
+					if (ea) {
+                        try {
+						    document.execCommand("BackgroundImageCache", false, true)
+					    } catch (c) {}
+					}
 				}
 			},
 			Ya = function() {
-				o && (o.kb(), da = window.setTimeout(Ya, 30));
+				if (o) {
+                    o.kb();
+                    da = window.setTimeout(Ya, 30);
+				}
+                
 				var a = document.getElementById("hplogo-led");
-				if (a && G) a.style.backgroundPosition = -540 - 23 * Math.abs(Math.round(5 * Math.sin(G * Math.PI / 12))) + "px -139px", G++
+                
+				if (a && G) {
+                    a.style.backgroundPosition = -540 - 23 * Math.abs(Math.round(5 * Math.sin(G * Math.PI / 12))) + "px -139px";
+                    G++;
+				}
 			},
 			K = function() {
-				var a = document.getElementById("hplogo-led");
-				if (a) a.style.backgroundPosition = "1000px 1000px"
+				if (a = document.getElementById("hplogo-led"))
+                    a.style.backgroundPosition = "1000px 1000px";
 			},
 			$ = function() {
 				try {
@@ -1135,9 +1396,9 @@
 			};
 		google.doodle.cpDestroy = $;
 		google.doodle.go = function() {
-			window.location.href = "http://www.google.com/search?q=Les+Paul&ct=lespaul11-hp&oi=ddle"
+			window.location.href = "http://www.google.com/search?q=Les+Paul&ct=lespaul11-hp&oi=ddle";
 		};
-		google.x ? google.x("DOODLE", Xa) : Xa()
+		google.x ? google.x("DOODLE", Xa) : Xa();
 	} catch (Za) {
 		google.ml(Za, false, {
 			cause: "DOODLE"
